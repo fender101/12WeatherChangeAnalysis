@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Christopher Brady Website Homework</title>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <header class="header">
+    <nav class="navbar navbar-style">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menuicon">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a href=""><img class="logo" src="images/logo01.JPG"></a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="menuicon">
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="vis01.html">Vis01</a></li>
+                <li><a href="vis02.html">Vis02</a></li>
+                <li><a href="vis03.html">Vis03</a></li>
+                <li><a href="vis04.html">Vis04</a></li>
+                <li><a href="comp01.html">Comp01</a></li>
+                <li><a href="data01.html">Data01</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container text-center">
+        <div class="table-responsive">
+            <h1>Load Most Recent Data</h1>
+            <br />
+            <div>
+                <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+            </div>
+            <br />
+            <div id="city_table">
+
+            </div>
+        </div>
+    </div>   
+    </header>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    $('load_data').click(function(){
+        $.ajax({
+            url:"data.csv",
+            dataType:"text",
+            success:function(data)
+            {
+                var city_data = data.split(/\r?\n|\r/);
+                var table_data = '<table class="table table-bordered table-striped">';
+                for(var count = 0; count < city_data.length; count++)
+                {
+                    var cell_data = city_data[count].split(","); table_data += '<tr>';
+
+                    for(var cell_count = 0; cell_count < cell_data.length; cell_count++)
+                    {
+                        if(count === 0)
+                        {
+                            table_data += '<th>'+cell_data[cell_count]+'</th>';
+                        }
+                        else
+                        {
+                            table_data += '<td>'+cell_data[cell_count]+'</td>';
+                        }
+                    }
+                    table_data += '</tr>';
+                }
+                table_data += '</table>';
+                $('city_table').html(table_data);
+            }
+        })
+    })
+})
+</script>
