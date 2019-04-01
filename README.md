@@ -1,2 +1,2 @@
 # 12WeatherChangeAnalysis
-Create website with navbar to showcase weather analysis graphs.
+A responsive visualization dashboard website with navbar to showcase weather analysis graphs. Tools: HTML/CSS/Bootstrap
